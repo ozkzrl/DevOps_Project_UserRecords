@@ -1,17 +1,20 @@
-# Flask uygulaması için temel imaj
+# Base image
 FROM python:3.9-slim
 
-# Çalışma dizinini oluştur
+# Set working directory in the container
 WORKDIR /app
 
-# Gereksinimlerinizi yüklemek için requirements.txt dosyasını kopyalayın
+# Copy requirements.txt to the working directory
 COPY requirements.txt .
 
-# Bağımlılıkları yükleyin
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Uygulama dosyalarını kopyalayın
+# Copy the rest of the application code (including app.py)
 COPY . .
 
-# Flask uygulamasını başlatan komut
+# Expose the application port
+EXPOSE 5000
+
+# Run the Flask app
 CMD ["python", "app.py"]
